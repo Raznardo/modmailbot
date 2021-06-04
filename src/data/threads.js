@@ -261,7 +261,7 @@ async function createNewThreadForUser(user, opts = {}) {
       const {nickname, joinDate} = getHeaderGuildInfo(guildData.member);
       const headerItems = [
         `Pseudo **${utils.escapeMarkdown(nickname)}**`,
-        `A rejoint le serveur il y a **${joinDate}**`
+        `a rejoint le serveur il y a **${joinDate}**`
       ];
 
       if (guildData.member.voiceState.channelID) {
@@ -288,7 +288,7 @@ async function createNewThreadForUser(user, opts = {}) {
     // Modmail history / previous logs
     const userLogCount = await getClosedThreadCountByUserId(user.id);
     if (userLogCount > 0) {
-      infoHeader += `\n\nCet utilisateur a déjà créer **${userLogCount}** ticket. \`${config.prefix}logs\` pour les voir.`;
+      infoHeader += `\n\nCet utilisateur a déjà créé **${userLogCount}** ticket. \`${config.prefix}logs\` pour les voir.`;
     }
 
     infoHeader += "\n────────────────";
