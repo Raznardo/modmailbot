@@ -44,7 +44,7 @@ module.exports = ({ bot, knex, config, commands }) => {
 
       await thread.close(false, thread.scheduled_close_silent);
 
-      await sendCloseNotification(thread, `Modmail thread #${thread.thread_number} with ${thread.user_name} (${thread.user_id}) was closed as scheduled by ${thread.scheduled_close_name}`);
+      await sendCloseNotification(thread, `Le ticket #${thread.thread_number} avec ${thread.user_name} (${thread.user_id}) was closed as scheduled by ${thread.scheduled_close_name}`);
     }
   }
 
@@ -83,7 +83,7 @@ module.exports = ({ bot, knex, config, commands }) => {
         suppressSystemMessages = true;
       });
 
-      closedBy = "the user";
+      closedBy = "le joueur";
     } else {
       // A staff member is closing the thread
       if (! utils.messageIsOnInboxServer(msg)) return;

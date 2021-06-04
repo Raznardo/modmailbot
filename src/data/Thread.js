@@ -606,7 +606,7 @@ class Thread {
       if (silent) {
         await this.postSystemMessage("Closing thread silently...");
       } else {
-        await this.postSystemMessage("Closing thread...");
+        await this.postSystemMessage("Fermeture du ticket...");
       }
     }
 

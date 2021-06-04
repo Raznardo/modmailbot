@@ -71,7 +71,7 @@ async function findOpenThreadByUserId(userId) {
 function getHeaderGuildInfo(member) {
   return {
     nickname: member.nick || member.user.username,
-    joinDate: humanizeDuration(Date.now() - member.joinedAt, {largest: 2, round: true})
+    joinDate: humanizeDuration(Date.now() - member.joinedAt, {largest: 2, round: true, language: "fr"})
   };
 }
 
@@ -244,8 +244,8 @@ async function createNewThreadForUser(user, opts = {}) {
     const infoHeaderItems = [];
 
     // Account age
-    const accountAge = humanizeDuration(Date.now() - user.createdAt, {largest: 2, round: true});
-    infoHeaderItems.push(`ACCOUNT AGE **${accountAge}**`);
+    const accountAge = humanizeDuration(Date.now() - user.createdAt, {largest: 2, round: true, language: "fr"});
+    infoHeaderItems.push(`Compte crée il y a **${accountAge}**`);
 
     // User id (and mention, if enabled)
     if (config.mentionUserInThreadHeader) {
@@ -260,20 +260,20 @@ async function createNewThreadForUser(user, opts = {}) {
     for (const [guildId, guildData] of userGuildData.entries()) {
       const {nickname, joinDate} = getHeaderGuildInfo(guildData.member);
       const headerItems = [
-        `NICKNAME **${utils.escapeMarkdown(nickname)}**`,
-        `JOINED **${joinDate}** ago`
+        `Pseudo **${utils.escapeMarkdown(nickname)}**`,
+        `A rejoint le serveur il y a **${joinDate}**`
       ];
 
       if (guildData.member.voiceState.channelID) {
         const voiceChannel = guildData.guild.channels.get(guildData.member.voiceState.channelID);
         if (voiceChannel) {
-          headerItems.push(`VOICE CHANNEL **${utils.escapeMarkdown(voiceChannel.name)}**`);
+          headerItems.push(`Channel vocal **${utils.escapeMarkdown(voiceChannel.name)}**`);
         }
       }
 
       if (config.rolesInThreadHeader && guildData.member.roles.length) {
         const roles = guildData.member.roles.map(roleId => guildData.guild.roles.get(roleId)).filter(Boolean);
-        headerItems.push(`ROLES **${roles.map(r => r.name).join(", ")}**`);
+        headerItems.push(`Roles **${roles.map(r => r.name).join(", ")}**`);
       }
 
       const headerStr = headerItems.join(", ");
@@ -288,7 +288,7 @@ async function createNewThreadForUser(user, opts = {}) {
     // Modmail history / previous logs
     const userLogCount = await getClosedThreadCountByUserId(user.id);
     if (userLogCount > 0) {
-      infoHeader += `\n\nThis user has **${userLogCount}** previous modmail threads. Use \`${config.prefix}logs\` to see them.`;
+      infoHeader += `\n\nCet utilisateur a déjà créer **${userLogCount}** ticket. \`${config.prefix}logs\` pour les voir.`;
     }
 
     infoHeader += "\n────────────────";
@@ -304,7 +304,7 @@ async function createNewThreadForUser(user, opts = {}) {
     if (config.updateNotifications) {
       const availableUpdate = await updates.getAvailableUpdate();
       if (availableUpdate) {
-        await newThread.postNonLogMessage(`📣 New bot version available (${availableUpdate})`);
+        await newThread.postNonLogMessage(`📣 Nouvelle version dispo (${availableUpdate})`);
       }
     }
 
