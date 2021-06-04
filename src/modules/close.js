@@ -145,7 +145,7 @@ module.exports = ({ bot, knex, config, commands }) => {
 
     await thread.close(suppressSystemMessages, silentClose);
 
-    await sendCloseNotification(thread, `Modmail thread #${thread.thread_number} with ${thread.user_name} (${thread.user_id}) was closed by ${closedBy}`);
+    await sendCloseNotification(thread, `Le ticket #${thread.thread_number} avec ${thread.user_name} (${thread.user_id}) a été fermé par ${closedBy}`);
   }, {
     options: [
       { name: "silent", shortcut: "s", isSwitch: true },
@@ -169,6 +169,6 @@ module.exports = ({ bot, knex, config, commands }) => {
 
     await thread.close(true);
 
-    await sendCloseNotification(thread, `Modmail thread #${thread.thread_number} with ${thread.user_name} (${thread.user_id}) was closed automatically because the channel was deleted`);
+    await sendCloseNotification(thread, `Le ticket #${thread.thread_number} avec ${thread.user_name} (${thread.user_id}) a été fermé automatiquement car le channel a été supprimé`);
   });
 };
