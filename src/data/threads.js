@@ -203,7 +203,7 @@ async function createNewThreadForUser(user, opts = {}) {
     let createdChannel;
     try {
       createdChannel = await utils.getInboxGuild().createChannel(channelName, DISOCRD_CHANNEL_TYPES.GUILD_TEXT, {
-        reason: "New Modmail thread",
+        reason: "Nouveau ticket",
         parentID: newThreadCategoryId,
       });
     } catch (err) {
@@ -234,7 +234,7 @@ async function createNewThreadForUser(user, opts = {}) {
           : utils.getInboxMentionAllowedMentions();
 
         await newThread.postNonLogMessage({
-          content: `${staffMention}New modmail thread (${newThread.user_name})`,
+          content: `${staffMention}Nouveau ticket (${newThread.user_name})`,
           allowedMentions,
         });
       }
